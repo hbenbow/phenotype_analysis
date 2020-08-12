@@ -26,8 +26,8 @@ tri.to.squ<-function(x)
 # Read data in and wrangle
 # ============================================================================
 
-AUDPC_Pycnidia <- read.csv("~/Documents/Sobia/Watkins/AUDPC_Pycnidia.csv")
-AUDPC_Chlorosis <- read.csv("~/Documents/Sobia/Watkins/AUDPC_Chlorosis.csv")
+AUDPC_Pycnidia <- read.csv("~/Documents/Sobia/Watkins/Data/AUDPC_Pycnidia.csv")
+AUDPC_Chlorosis <- read.csv("~/Documents/Sobia/Watkins/Data/AUDPC_Chlorosis.csv")
 AUDPC_Chlorosis<-na.omit(AUDPC_Chlorosis)
 AUDPC_Pycnidia<-na.omit(AUDPC_Pycnidia)
 
@@ -108,7 +108,7 @@ ggplot(ch, aes(x=Treatment, y=AUDPC, group=Genotype)) +
         axis.text.y = element_text(colour="black", size=15)) +
   geom_text(aes(x=Treatment, y=AUDPC+SE, label=Letters), position=position_dodge(width=0.9), vjust=-1, size=4)+
   coord_cartesian(ylim=c(0,1500))
-ggsave("~/Documents/Sobia/Watkins/S_L_necrosis.pdf")
+ggsave("~/Documents/Sobia/Watkins/Raw figures/S_L_necrosis.pdf")
 
 # ============================================================================
 
@@ -206,7 +206,7 @@ ggplot(all_Pycnidia, aes(x=Treatment, y=AUDPC)) +
   coord_cartesian(ylim=c(0, 1))+
   scale_y_continuous(expand = c(0,3))+
   geom_hline(aes(yintercept=0))
-ggsave("~/Documents/Sobia/Watkins/Pycnidia.pdf")
+ggsave("~/Documents/Sobia/Watkins/Raw figures/Pycnidia.pdf")
 # ============================================================================
 
 # Compare pycnidia AUDPC to Stigg and Longbow
@@ -269,7 +269,7 @@ ggplot(py, aes(x=Treatment, y=AUDPC, group=Genotype)) +
         axis.text.x = element_text(colour="black", size=15, angle=20, hjust=1)) +
   geom_text(aes(x=Treatment, y=AUDPC+SE, label=Letters), position=position_dodge(width=0.9), vjust=-1, size=4)+
   coord_cartesian(ylim=c(0,450))
-ggsave("~/Documents/Sobia/Watkins/S_L_pycnidia.pdf")
+ggsave("~/Documents/Sobia/Watkins/Raw figures/S_L_pycnidia.pdf")
 
 # ============================================================================
 
