@@ -4,6 +4,7 @@ library(dplyr)
 library(plyr)
 library(multcompView)
 library(readxl)
+library(FSA)
 # Read data in and wrangle
 # ============================================================================
 
@@ -145,11 +146,10 @@ ggplot(AUDPC_by_strain, aes(x=Accession, y=AUDPC)) +
   theme_bw() + theme(legend.position = "right") + 
   geom_errorbar(aes(ymin=AUDPC - SE, ymax= AUDPC+SE), width=0.3) + 
   ylab("AUDPC (% of cv. Longbow)") +
-  scale_fill_manual(values=c("#66C2A5" ,"#FC8D62", "#8DA0CB" ,"#E78AC3","#A6D854" ),
+  scale_fill_manual(values=c("#66C2A5" ,"#FC8D62", "#8DA0CB" ,"#E78AC3"),
                     labels=c(expression(paste(italic("Aegilops tauschii"))),
                              expression(paste(italic("Triticum aestivum"))),
                              expression(paste(italic("Triticum durum"))),                           
-                             expression(paste(italic("Triticum macha"))),
                              expression(paste(italic("Triticum urartu")))))+
   theme(text = element_text(size=25, colour="black"), 
         axis.text.x = element_text(colour="black", size=13, angle=45, hjust=1),
@@ -166,11 +166,10 @@ ggplot(AUDPC3, aes(x=Accession, y=AUDPC)) +
   theme_bw() + theme(legend.position = "right") + 
   geom_errorbar(aes(ymin=AUDPC - SE, ymax= AUDPC+SE), width=0.3) + 
   ylab("AUDPC (% of cv. Longbow)") +
-  scale_fill_manual(values=c("#66C2A5" ,"#FC8D62", "#8DA0CB" ,"#E78AC3","#A6D854"),
+  scale_fill_manual(values=c("#66C2A5" ,"#FC8D62", "#8DA0CB" ,"#E78AC3"),
                     labels=c(expression(paste(italic("Aegilops tauschii"))),
                              expression(paste(italic("Triticum aestivum"))),
                              expression(paste(italic("Triticum durum"))),                           
-                             expression(paste(italic("Triticum macha"))),
                              expression(paste(italic("Triticum urartu"))))) +
   theme(text = element_text(size=25, colour="black"), 
         axis.text.x = element_text(colour="black", size=15, angle=45, hjust=1),
