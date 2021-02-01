@@ -82,6 +82,20 @@ all_necrosis<-as.data.frame(do.call(rbind, list))
 all_necrosis$Factor<-paste(all_necrosis$Treatment, all_necrosis$Genotype)
 all_necrosis<-all_necrosis[!(duplicated(all_necrosis$Factor)),]
 all_necrosis$Treatment<-factor(all_necrosis$Treatment, levels=c("Tween 20", "IPO323" ,  "IPO88004", "IPO89011","IPO90012" ,"IPO94269", "Isolate average"))
+
+ggplot(all_necrosis[!(all_necrosis$Genotype=="Longbow" | all_necrosis$Genotype=="Stigg"),], aes(x=Treatment, y=AUDPC)) + 
+  geom_bar(stat="identity", position=position_dodge(width=0.9))+ 
+  theme_bw() + theme(legend.position = "right") + 
+  facet_wrap(~Genotype, ncol=2) +
+  geom_errorbar(aes(ymin=AUDPC - 2*SE, ymax= AUDPC+2*SE),position=position_dodge(width=0.9), width=0.3) + 
+  ylab("AUDPC necrosis") +
+  scale_fill_brewer(palette = "Set2")+
+  theme(text = element_text(size=20, colour="black"), 
+        axis.text.x = element_text(colour="black", size=15, angle=20, hjust=1)) +
+  geom_text(aes(x=Treatment, y=AUDPC+SE, label=Letters), position=position_dodge(width=0.9), vjust=-1, size=4)+
+  coord_cartesian(ylim=c(0,1500))
+ggsave("~/Documents/Sobia/Watkins/Raw figures/necrosis_by_genotpye.pdf")
+
 # necrosis analysis general
 # ============================================================================
 
@@ -133,6 +147,19 @@ all_pycnidia<-as.data.frame(do.call(rbind, list))
 all_pycnidia$Factor<-paste(all_pycnidia$Treatment, all_pycnidia$Genotype)
 all_pycnidia<-all_pycnidia[!(duplicated(all_pycnidia$Factor)),]
 all_pycnidia$Treatment<-factor(all_pycnidia$Treatment, levels=c("Tween 20", "IPO323" ,  "IPO88004", "IPO89011","IPO90012" ,"IPO94269", "Isolate average"))
+
+ggplot(all_pycnidia, aes(x=Treatment, y=AUDPC)) + 
+  geom_bar(stat="identity", position=position_dodge(width=0.9))+ 
+  theme_bw() + theme(legend.position = "right") + 
+  facet_wrap(~Genotype, ncol=2) +
+  geom_errorbar(aes(ymin=AUDPC - 2*SE, ymax= AUDPC+2*SE),position=position_dodge(width=0.9), width=0.3) + 
+  ylab("AUDPC necrosis") +
+  scale_fill_brewer(palette = "Set2")+
+  theme(text = element_text(size=20, colour="black"), 
+        axis.text.x = element_text(colour="black", size=15, angle=20, hjust=1)) +
+  geom_text(aes(x=Treatment, y=AUDPC+SE, label=Letters), position=position_dodge(width=0.9), vjust=-1, size=4)+
+  coord_cartesian(ylim=c(0,1500))
+
 # ============================================================================
 
 
@@ -280,3 +307,4 @@ ggplot(all_pycnidia_var[!(all_pycnidia_var$Treatment=="Isolate average"),], aes(
 d
 
 # ============================================================================
+

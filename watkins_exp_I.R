@@ -10,6 +10,7 @@ library(FSA)
 
 watkins_both<-read.csv(file="~/Documents/Sobia/Watkins/Data/Sobia_original_watkins_spss.csv", na.strings = "-")
 watkins_both$Percentage_of_Longbow<-as.numeric(watkins_both$Percentage_of_Longbow)
+watkins_both$Percentage_decrease<-100-(watkins_both$Percentage_of_Longbow)
 watkins_both$Accession<-as.factor(watkins_both$Accession)
 # ============================================================================
 # necrosis analysis general
@@ -37,6 +38,8 @@ AUDPC$n<-
 AUDPC$SE<-AUDPC$SD/sqrt(AUDPC$n)
 colnames(AUDPC)<-c("Accession", "Strain","Species" ,"AUDPC", "SD", "n", "SE")
 
+lessthan_30_eprcent<-AUDPC[(AUDPC$AUDPC <=70),]
+kable(lessthan_30_eprcent)
 
 list<-list()
 data0<-watkins_both
