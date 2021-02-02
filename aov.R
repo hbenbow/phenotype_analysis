@@ -1,13 +1,13 @@
 library(jtools)
 library(interactions)
 library(ggplot2)
-library("ggpubr")
+library(ggpubr)
 
 
 AUDPC_Pycnidia <-
-  read.csv("~/Documents/Sobia/Watkins/AUDPC_Pycnidia.csv")
+  read.csv("~/Documents/Sobia/Watkins/Data/AUDPC_Pycnidia.csv")
 AUDPC_Chlorosis <-
-  read.csv("~/Documents/Sobia/Watkins/AUDPC_Chlorosis.csv")
+  read.csv("~/Documents/Sobia/Watkins/Data/AUDPC_necrosis.csv")
 AUDPC_Chlorosis <- na.omit(AUDPC_Chlorosis)
 AUDPC_Pycnidia <- na.omit(AUDPC_Pycnidia)
 AUDPC_Chlorosis$Factor <-
@@ -58,9 +58,8 @@ summary(av_pycnidia)
 knit(summary(av_necrosis))
 interact_plot(fiti, pred = AUDPCnecrosis, modx = Treatment)
 
-i="Longbow"
 
-# for (i in chlor.and.pyc$Variety) {
+for (i in chlor.and.pyc$Variety) {
   data <- chlor.and.pyc[(chlor.and.pyc$Variety == i), ]
   data <- data[!(data$Treatment == "Isolate average"), ]
   fiti <- lm(AUDPCpycnidia ~ AUDPCnecrosis *Treatment, data = data)
@@ -70,3 +69,18 @@ i="Longbow"
     theme_classic()
   ggsave(paste(i, ".pdf"))
 }
+
+
+list<-list()
+for(i in unique(chlor.and.pyc$Variety)){
+    data <- chlor.and.pyc[(chlor.and.pyc$Variety == i), ]
+    for(t in unique(data$Treatment)){
+    data2 <- data[(data$Treatment == t), ]
+    cor<-as.data.frame(cor(data2$AUDPCnecrosis, data2$AUDPCpycnidia))
+    cor$Treatment<-paste(t)
+    cor$Genotype<-paste(i)
+    list[[length(list)+1]]<-cor
+  } 
+}
+all1<-as.data.frame(do.call(rbind, list))
+
